@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { axiosBaseQuery } from '@/utils/http.util';
+import axiosBaseQuery from '@/utils/http.util';
 
 import { SignInRequestParams, SignInRequestResponse } from './types';
 

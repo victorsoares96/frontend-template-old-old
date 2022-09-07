@@ -7,7 +7,7 @@ import { enqueueSnackbar } from '@/store/notification/notification.slice';
 import { logout } from '@/store/session/session.slice';
 import { Error } from '@/types/error.type';
 
-export const axiosBaseQuery =
+const axiosBaseQuery =
   (
     { baseUrl }: { baseUrl: string } = { baseUrl: '' },
   ): BaseQueryFn<
@@ -100,3 +100,5 @@ export const axiosBaseQuery =
       };
     }
   };
+
+export default axiosBaseQuery;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { createSlice } from '@reduxjs/toolkit';
 import { SnackbarKey } from 'notistack';
 
@@ -48,7 +49,7 @@ export const enqueueSnackbar =
 export const closeSnackbar =
   (key: SnackbarKey, dismissAll = !key): AppThunk =>
   (dispatch, getState) => {
-    const notifications = getState().notification.notifications;
+    const { notifications } = getState().notification;
 
     const newNotifications = notifications.map((notification) =>
       dismissAll || notification.options.key === key
@@ -62,7 +63,7 @@ export const closeSnackbar =
 export const removeSnackbar =
   (key: SnackbarKey): AppThunk =>
   (dispatch, getState) => {
-    const notifications = getState().notification.notifications;
+    const { notifications } = getState().notification;
 
     const newNotifications = notifications.filter(
       (notification) => notification.options.key !== key,

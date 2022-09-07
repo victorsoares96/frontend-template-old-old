@@ -6,7 +6,7 @@ import type { Notifications } from './types';
 
 const title = manifestJSON.name;
 
-const email = packageJSON.bugs.email;
+const { email } = packageJSON.bugs;
 
 const repository = packageJSON.repository.url;
 

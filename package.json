@@ -17,7 +17,12 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "https-preview": "serve dist",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "style:check": "prettier --check .",
+    "style:fix": "prettier --write .",
+    "lint:check": "eslint ./src/ --ext .ts,.js,.json",
+    "lint:fix": "eslint --fix ./src/ --ext .ts,.js,.json",
+    "type-check": "tsc -p tsconfig.json --noEmit --pretty --skipLibCheck"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -66,14 +71,6 @@
     "typescript": "^4.7.2",
     "vite": "^2.9.9",
     "vite-plugin-pwa": "^0.12.0"
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
-    ],
-    "src/**/*.{js,jsx,ts,tsx,json}": [
-      "eslint --max-warnings=0"
-    ]
   },
   "author": {
     "name": "Victor Soares",
