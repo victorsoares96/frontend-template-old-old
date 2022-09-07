@@ -43,10 +43,15 @@ const slice = createSlice({
 
       const session: Session = {
         token: action.payload.token,
-        authenticated: true,
         user: action.payload.user,
       };
-      localStorage.setItem('session', JSON.stringify(session));
+      localStorage.setItem(
+        'session',
+        JSON.stringify({
+          ...session,
+          authenticated: true,
+        }),
+      );
     });
   },
 });

@@ -13,19 +13,19 @@ import Tooltip from '@mui/material/Tooltip';
 
 import { FlexBox } from '@/components/styled';
 import { repository, title } from '@/config';
-import useHotKeysDialog from '@/store/hotkeys';
-import useNotifications from '@/store/notifications';
-import useSidebar from '@/store/sidebar';
-import useTheme from '@/store/theme';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import useNotifications from '@/hooks/useNotifications';
+import { open as openHotkeysDialog } from '@/store/hotkeys/hotkeys.slice';
+import { toggle as toggleSidebar } from '@/store/sidebar/sidebar.slice';
+import { toggle as toggleTheme } from '@/store/theme/theme.slice';
 
 import { HotKeysButton } from './styled';
 import { getRandomJoke } from './utils';
 
 function Header() {
-  const [, sidebarActions] = useSidebar();
-  const [, themeActions] = useTheme();
+  const dispatch = useAppDispatch();
+
   const [, notificationsActions] = useNotifications();
-  const [, hotKeysDialogActions] = useHotKeysDialog();
 
   function showNotification() {
     notificationsActions.push({
@@ -53,7 +53,7 @@ function Header() {
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <FlexBox sx={{ alignItems: 'center' }}>
             <IconButton
-              onClick={sidebarActions.toggle}
+              onClick={() => dispatch(toggleSidebar)}
               size="large"
               edge="start"
               color="info"
@@ -62,10 +62,12 @@ function Header() {
             >
               <MenuIcon />
             </IconButton>
+
             <Button onClick={showNotification} color="info">
               {title}
             </Button>
           </FlexBox>
+
           <FlexBox>
             <FlexBox>
               <Tooltip title="Hot keys" arrow>
@@ -73,21 +75,30 @@ function Header() {
                   size="small"
                   variant="outlined"
                   aria-label="open hotkeys dialog"
-                  onClick={hotKeysDialogActions.open}
+                  onClick={() => dispatch(openHotkeysDialog)}
                 >
                   alt + /
                 </HotKeysButton>
               </Tooltip>
             </FlexBox>
+
             <Divider orientation="vertical" flexItem />
+
             <Tooltip title="It's open source" arrow>
               <IconButton color="info" size="large" component="a" href={repository} target="_blank">
                 <GitHubIcon />
               </IconButton>
             </Tooltip>
+
             <Divider orientation="vertical" flexItem />
+
             <Tooltip title="Switch theme" arrow>
-              <IconButton color="info" edge="end" size="large" onClick={themeActions.toggle}>
+              <IconButton
+                color="info"
+                edge="end"
+                size="large"
+                onClick={() => dispatch(toggleTheme)}
+              >
                 <ThemeIcon />
               </IconButton>
             </Tooltip>

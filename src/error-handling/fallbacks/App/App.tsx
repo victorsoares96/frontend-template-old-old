@@ -17,6 +17,7 @@ function AppErrorBoundaryFallback() {
           <Typography variant="h5" component="h3">
             {messages.app.crash.title}
           </Typography>
+
           <Button
             startIcon={<EmailIcon />}
             variant="outlined"
@@ -27,7 +28,9 @@ function AppErrorBoundaryFallback() {
           >
             {messages.app.crash.options.email}
           </Button>
+
           <Typography component="h6">or</Typography>
+
           <Button startIcon={<RestartIcon />} sx={{ mt: 3 }} variant="outlined" onClick={resetApp}>
             {messages.app.crash.options.reset}
           </Button>

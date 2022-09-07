@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import type { SnackbarKey } from 'notistack';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 
-import useNotifications from '@/store/notifications';
+import useNotifications from '@/hooks/useNotifications';
 
 // TODO (Suren): this should be a custom hook :)
 function SW() {

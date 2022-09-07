@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import { SnackbarKey, useSnackbar } from 'notistack';
 
-import useNotifications from '@/store/notifications';
+import useNotifications from '@/hooks/useNotifications';
 
 // NOTE: this is a workaround for a missing feature in notistack
 // This will be removed once the new version of notistack is released

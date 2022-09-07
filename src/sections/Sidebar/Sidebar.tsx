@@ -8,18 +8,21 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { useAppSelector } from '@/hooks/useAppSelector';
 import routes from '@/routes';
-import useSidebar from '@/store/sidebar';
+import { close as closeSidebar, open as openSidebar } from '@/store/sidebar/sidebar.slice';
 
 function Sidebar() {
-  const [isSidebarOpen, sidebarActions] = useSidebar();
+  const dispatch = useAppDispatch();
+  const isSidebarOpen = useAppSelector((state) => state.sidebar.open);
 
   return (
     <SwipeableDrawer
       anchor="left"
       open={isSidebarOpen}
-      onClose={sidebarActions.close}
-      onOpen={sidebarActions.open}
+      onClose={() => dispatch(closeSidebar)}
+      onOpen={() => dispatch(openSidebar)}
       disableBackdropTransition={false}
       swipeAreaWidth={30}
     >
@@ -28,8 +31,9 @@ function Sidebar() {
           .filter((route) => route.title)
           .map(({ path, title, icon: Icon }) => (
             <ListItem sx={{ p: 0 }} key={path}>
-              <ListItemButton onClick={sidebarActions.close} component={Link} to={path}>
+              <ListItemButton onClick={() => dispatch(closeSidebar)} component={Link} to={path}>
                 <ListItemIcon>{Icon ? <Icon /> : <DefaultIcon />}</ListItemIcon>
+
                 <ListItemText>{title}</ListItemText>
               </ListItemButton>
             </ListItem>
