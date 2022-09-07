@@ -15,13 +15,3 @@ export type Session = {
   token: string;
   user: User;
 };
-
-export type SignInRequestResponse = {
-  user: User;
-  token: string;
-};
-
-export type SignInRequestParams = {
-  username: string;
-  password: string;
-};

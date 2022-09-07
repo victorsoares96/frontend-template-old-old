@@ -1,73 +1,38 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 
-import { OptionsObject, SnackbarKey, SnackbarMessage } from 'notistack';
+import { SnackbarKey } from 'notistack';
 
-import { notifications as notificationsDefaults } from '@/config';
+import {
+  closeSnackbar as closeSnackbarAction,
+  enqueueSnackbar as enqueueSnackbarAction,
+  removeSnackbar as removeSnackbarAction,
+} from '@/store/notification/notification.slice';
+import { Notification } from '@/store/notification/types';
 
-interface Notification {
-  message: SnackbarMessage;
-  options: OptionsObject;
-  dismissed: boolean;
+import { useAppDispatch } from './useAppDispatch';
+import { useAppSelector } from './useAppSelector';
+
+export function useNotifications() {
+  const dispatch = useAppDispatch();
+
+  const notifications = useAppSelector((state) => state.notification.notifications);
+
+  const enqueueSnackbar = useCallback(
+    (notification: Partial<Notification>) => dispatch(enqueueSnackbarAction(notification)),
+    [dispatch],
+  );
+  const closeSnackbar = useCallback(
+    (key: SnackbarKey, dismissAll = !key) => dispatch(closeSnackbarAction(key, dismissAll)),
+    [dispatch],
+  );
+  const removeSnackbar = useCallback(
+    (key: SnackbarKey) => dispatch(removeSnackbarAction(key)),
+    [dispatch],
+  );
+
+  const actions = useMemo(
+    () => ({ enqueueSnackbar, closeSnackbar, removeSnackbar }),
+    [enqueueSnackbar, closeSnackbar, removeSnackbar],
+  );
+  return { notifications, ...actions };
 }
-
-type Actions = {
-  push: (notification: Partial<Notification>) => SnackbarKey;
-  close: (key: SnackbarKey, dismissAll?: boolean) => void;
-  remove: (key: SnackbarKey) => void;
-};
-
-function useNotifications(): [Notification[], Actions] {
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-
-  const push = useCallback(
-    (notification: Partial<Notification>) => {
-      // TODO (Suren): use uuid
-      const id = Math.random().toString();
-      setNotifications((notifications): Notification[] => [
-        // TODO (Suren): use immer
-        ...notifications,
-        {
-          ...notification,
-          message: notification.message,
-          dismissed: false,
-          options: {
-            ...notificationsDefaults.options,
-            ...notification.options,
-            key: id,
-          },
-        },
-      ]);
-
-      return id;
-    },
-    [setNotifications],
-  );
-
-  const close = useCallback(
-    (key: SnackbarKey, dismissAll = !key) => {
-      setNotifications((notifications) =>
-        notifications.map((notification) =>
-          dismissAll || notification.options.key === key
-            ? { ...notification, dismissed: true }
-            : { ...notification },
-        ),
-      );
-    },
-    [setNotifications],
-  );
-
-  const remove = useCallback(
-    (key: SnackbarKey) => {
-      setNotifications((notifications) =>
-        notifications.filter((notification) => notification.options.key !== key),
-      );
-    },
-    [setNotifications],
-  );
-
-  const actions = useMemo(() => ({ push, close, remove }), [push, close, remove]);
-
-  return [notifications, actions];
-}
-
-export default useNotifications;

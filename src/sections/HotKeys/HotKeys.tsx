@@ -26,20 +26,20 @@ function HotKeys() {
   // And as you know we can't use hooks inside loops (read "Rules of Hooks" - https://reactjs.org/docs/hooks-rules.html).
   // There is always a workaround, but sometimes it's better to avoid premature and unnecessary optimizations :)
   useHotkeys('alt+s', () => {
-    dispatch(toggleSidebar);
+    dispatch(toggleSidebar());
   });
   useHotkeys('alt+t', () => {
-    dispatch(toggleTheme);
+    dispatch(toggleTheme());
   });
   useHotkeys('alt+/', () => {
-    dispatch(toggleHotkeysDialog);
+    dispatch(toggleHotkeysDialog());
   });
 
   return (
     <Dialog
       fullWidth
       maxWidth="xs"
-      onClose={() => dispatch(closeHotkeysDialog)}
+      onClose={() => dispatch(closeHotkeysDialog())}
       open={isHotKeysDialogOpen}
     >
       <DialogTitle>Hot Keys</DialogTitle>
@@ -47,21 +47,25 @@ function HotKeys() {
         <FlexBox alignItems="center" height={50} justifyContent="space-between">
           <Typography>Toggle Theme</Typography>
 
-          <Button color="warning" variant="outlined" onClick={() => dispatch(toggleTheme)}>
+          <Button color="warning" variant="outlined" onClick={() => dispatch(toggleTheme())}>
             alt + t
           </Button>
         </FlexBox>
         <FlexBox alignItems="center" height={50} justifyContent="space-between">
           <Typography>Toggle Sidebar</Typography>
 
-          <Button color="warning" variant="outlined" onClick={() => dispatch(toggleSidebar)}>
+          <Button color="warning" variant="outlined" onClick={() => dispatch(toggleSidebar())}>
             alt + s
           </Button>
         </FlexBox>
         <FlexBox alignItems="center" height={50} justifyContent="space-between">
           <Typography>Toggle Hot Keys&apos; Dialog</Typography>
 
-          <Button color="warning" variant="outlined" onClick={() => dispatch(toggleHotkeysDialog)}>
+          <Button
+            color="warning"
+            variant="outlined"
+            onClick={() => dispatch(toggleHotkeysDialog())}
+          >
             alt + /
           </Button>
         </FlexBox>

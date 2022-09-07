@@ -4,8 +4,13 @@ import { Themes } from '@/theme/types';
 
 import type { InitialState } from './types';
 
+function getStoredTheme(): Themes {
+  const theme = localStorage.getItem('theme-mode');
+  return theme === 'dark' ? Themes.DARK : Themes.LIGHT;
+}
+
 const initialState: InitialState = {
-  themeMode: Themes.DARK,
+  themeMode: getStoredTheme(),
 };
 
 const slice = createSlice({

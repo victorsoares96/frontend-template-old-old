@@ -6,12 +6,15 @@ import sessionSlice from '@/store/session/session.slice';
 import sidebarSlice from '@/store/sidebar/sidebar.slice';
 import themeSlice from '@/store/theme/theme.slice';
 
+import notificationSlice from './notification/notification.slice';
+
 export const store = configureStore({
   reducer: {
     session: sessionSlice,
     hotkeys: hotkeysSlice,
     theme: themeSlice,
     sidebar: sidebarSlice,
+    notification: notificationSlice,
     [mainApi.reducerPath]: mainApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(mainApi.middleware),

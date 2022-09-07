@@ -14,7 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { FlexBox } from '@/components/styled';
 import { repository, title } from '@/config';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
-import useNotifications from '@/hooks/useNotifications';
+import { useNotifications } from '@/hooks/useNotifications';
 import { open as openHotkeysDialog } from '@/store/hotkeys/hotkeys.slice';
 import { toggle as toggleSidebar } from '@/store/sidebar/sidebar.slice';
 import { toggle as toggleTheme } from '@/store/theme/theme.slice';
@@ -25,18 +25,11 @@ import { getRandomJoke } from './utils';
 function Header() {
   const dispatch = useAppDispatch();
 
-  const [, notificationsActions] = useNotifications();
+  const { enqueueSnackbar } = useNotifications();
 
   function showNotification() {
-    notificationsActions.push({
+    enqueueSnackbar({
       options: {
-        // Show fully customized notification
-        // Usually, to show a notification, you'll use something like this:
-        // notificationsActions.push({ message: ... })
-        // `message` accepts string as well as ReactNode
-        // But you also can use:
-        // notificationsActions.push({ options: { content: ... } })
-        // to show fully customized notification
         content: (
           <Alert severity="info">
             <AlertTitle>Notification demo (random IT jokes :))</AlertTitle>
@@ -53,7 +46,7 @@ function Header() {
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <FlexBox sx={{ alignItems: 'center' }}>
             <IconButton
-              onClick={() => dispatch(toggleSidebar)}
+              onClick={() => dispatch(toggleSidebar())}
               size="large"
               edge="start"
               color="info"
@@ -75,7 +68,7 @@ function Header() {
                   size="small"
                   variant="outlined"
                   aria-label="open hotkeys dialog"
-                  onClick={() => dispatch(openHotkeysDialog)}
+                  onClick={() => dispatch(openHotkeysDialog())}
                 >
                   alt + /
                 </HotKeysButton>
@@ -97,7 +90,7 @@ function Header() {
                 color="info"
                 edge="end"
                 size="large"
-                onClick={() => dispatch(toggleTheme)}
+                onClick={() => dispatch(toggleTheme())}
               >
                 <ThemeIcon />
               </IconButton>
