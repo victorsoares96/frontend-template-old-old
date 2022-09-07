@@ -27,7 +27,7 @@ function Header() {
 
   const { enqueueSnackbar } = useNotifications();
 
-  function showNotification() {
+  const showNotification = () => {
     enqueueSnackbar({
       options: {
         content: (
@@ -38,7 +38,7 @@ function Header() {
         ),
       },
     });
-  }
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
