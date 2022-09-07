@@ -1,19 +1,23 @@
-import { useCallback, useMemo } from 'react';
-import { atom, useRecoilState } from 'recoil';
+import { useCallback, useMemo, useState } from 'react';
 
-import type { SnackbarKey } from 'notistack';
+import { OptionsObject, SnackbarKey, SnackbarMessage } from 'notistack';
 
 import { notifications as notificationsDefaults } from '@/config';
 
-import { Actions, Notification } from './types';
+interface Notification {
+  message: SnackbarMessage;
+  options: OptionsObject;
+  dismissed: boolean;
+}
 
-const notificationsState = atom<Notification[]>({
-  key: 'notificationsState',
-  default: [],
-});
+type Actions = {
+  push: (notification: Partial<Notification>) => SnackbarKey;
+  close: (key: SnackbarKey, dismissAll?: boolean) => void;
+  remove: (key: SnackbarKey) => void;
+};
 
 function useNotifications(): [Notification[], Actions] {
-  const [notifications, setNotifications] = useRecoilState(notificationsState);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   const push = useCallback(
     (notification: Partial<Notification>) => {

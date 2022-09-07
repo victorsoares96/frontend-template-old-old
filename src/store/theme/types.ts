@@ -1,5 +1,5 @@
-type Actions = {
-  toggle: () => void;
-};
+import { Themes } from '@/theme/types';
 
-export type { Actions };
+export type InitialState = {
+  themeMode: Themes;
+};

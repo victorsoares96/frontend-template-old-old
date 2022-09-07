@@ -1,7 +1,3 @@
-type Actions = {
-  toggle: () => void;
-  close: () => void;
-  open: () => void;
+export type InitialState = {
+  open: boolean;
 };
-
-export type { Actions };
