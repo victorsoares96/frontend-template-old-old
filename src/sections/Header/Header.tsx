@@ -5,17 +5,19 @@ import ThemeIcon from '@mui/icons-material/InvertColors';
 import MenuIcon from '@mui/icons-material/Menu';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import AppBar from '@mui/material/AppBar';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
+import { CSSObject, Theme, styled, useTheme } from '@mui/material/styles';
 
 import { FlexBox } from '@/components/styled';
 import { repository, title } from '@/config';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { useAppSelector } from '@/hooks/useAppSelector';
 import { useNotifications } from '@/hooks/useNotifications';
 import { open as openHotkeysDialog } from '@/store/hotkeys/hotkeys.slice';
 import { toggle as toggleSidebar } from '@/store/sidebar/sidebar.slice';
@@ -24,10 +26,36 @@ import { toggle as toggleTheme } from '@/store/theme/theme.slice';
 import { HotKeysButton } from './styled';
 import { getRandomJoke } from './utils';
 
+const drawerWidth = 240;
+
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean;
+}
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})<AppBarProps>(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(['width', 'margin'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
 function Header() {
   const { t } = useTranslation('common');
 
   const dispatch = useAppDispatch();
+
+  const isSidebarOpen = useAppSelector((state) => state.sidebar.open);
 
   const { enqueueSnackbar } = useNotifications();
 
@@ -46,7 +74,7 @@ function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar color="transparent" elevation={1} position="static">
+      <AppBar elevation={1} position="fixed" open={isSidebarOpen}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <FlexBox sx={{ alignItems: 'center' }}>
             <IconButton
