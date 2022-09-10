@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ThemeIcon from '@mui/icons-material/InvertColors';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -23,6 +25,8 @@ import { HotKeysButton } from './styled';
 import { getRandomJoke } from './utils';
 
 function Header() {
+  const { t } = useTranslation('common');
+
   const dispatch = useAppDispatch();
 
   const { enqueueSnackbar } = useNotifications();
@@ -57,7 +61,7 @@ function Header() {
             </IconButton>
 
             <Button onClick={showNotification} color="info">
-              {title}
+              {t('confirm')}
             </Button>
           </FlexBox>
 
