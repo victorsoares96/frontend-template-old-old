@@ -7,5 +7,7 @@
   "add": "Add",
   "close": "Close",
   "welcome": "Welcome to the customer portal",
-  "logIntoMyAccount": "Log into my account"
+  "logIntoMyAccount": "Log into my account",
+  "forgotPassword": "Forgot password?",
+  "signIn": "Sign in"
 }

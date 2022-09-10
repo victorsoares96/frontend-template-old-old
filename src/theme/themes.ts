@@ -52,7 +52,18 @@ const sharedTheme: ThemeOptions = {
   components: {
     MuiButtonBase: {
       defaultProps: {
-        disableRipple: true,
+        disableElevation: true,
+      },
+    },
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+      },
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          borderRadius: '12px',
+        },
       },
     },
     MuiFormLabel: {
@@ -61,13 +72,6 @@ const sharedTheme: ThemeOptions = {
           fontWeight: 500,
           fontSize: '14px',
           padding: '6px 0',
-        },
-      },
-    },
-    MuiCheckbox: {
-      styleOverrides: {
-        root: {
-          borderRadius: '50px',
         },
       },
     },

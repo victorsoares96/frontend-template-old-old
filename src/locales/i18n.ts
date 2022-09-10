@@ -13,6 +13,11 @@ export enum Languages {
   ptBR = 'pt-BR',
 }
 
+export const supportedLanguages: Array<{ flag: string; code: Languages; name: string }> = [
+  { flag: '🇺🇸', code: Languages.enUS, name: 'English' },
+  { flag: '🇧🇷', code: Languages.ptBR, name: 'Português' },
+];
+
 export const defaultNS = 'common';
 export const resources = {
   [Languages.enUS]: enUSResources,
