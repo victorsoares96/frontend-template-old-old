@@ -1,80 +1,92 @@
 import {
   MenuItem as MuiMenuItem,
-  MenuItemProps as MuiMenuItemProps,
+  NativeSelect as MuiNativeSelect,
   Select as MuiSelect,
-  SelectProps as MuiSelectProps,
   alpha,
   styled,
 } from '@mui/material';
 
-const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
-  '& .MuiInputBase-root': {
-    color: theme.palette.secondary.main,
-    border: '1.2px solid #DCDDE3',
-    overflow: 'hidden',
+const MenuItem = styled(MuiMenuItem)(({ theme }) => ({}));
+
+const NativeSelect = styled(MuiNativeSelect)(({ theme }) => ({
+  '&.MuiInputBase-root': {
+    backgroundColor: alpha(theme.palette.common.black, 0.06),
     borderRadius: '12px',
-    transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow']),
+    fontSize: '14px',
 
-    '& fieldset': {
-      border: 'none',
+    '&::before': {
+      borderBottom: 'none !important',
+
+      '::hover': {
+        borderBottom: 'none',
+      },
     },
 
-    '&.Mui-focused': {
-      boxShadow: `${alpha(theme.palette.secondary.main, 0.25)} 0 0 0 2px`,
-      borderColor: theme.palette.secondary.main,
+    '& .MuiNativeSelect-select': {
+      textAlign: 'center',
+      paddingRight: '0',
+      padding: '10px 20px',
+
+      '&:focus': {
+        borderRadius: '12px',
+      },
+    },
+
+    '&::after': {
+      borderBottom: 'none',
+    },
+
+    '& .MuiSvgIcon-root': {
+      display: 'none',
     },
   },
 
-  '& .MuiInputBase-input': {
-    '::placeholder': {
-      color: theme.palette.secondary.main,
-      fontWeight: 400,
-      fontSize: '14px',
-    },
-  },
+  '& .MuiSelect-select': {
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    borderRadius: '12px',
+    // color: theme.palette.common.white,
+    padding: theme.spacing(1, 2),
+    transition: theme.transitions.create(['background-color', 'box-shadow', 'border-color']),
 
-  '& .MuiInputAdornment-root': {
-    color: theme.palette.secondary.main,
-
-    '& .MuiIconButton-root': {
-      color: '#B1B2B3',
+    '&:focus': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
   },
 }));
 
 const Select = styled(MuiSelect)(({ theme }) => ({
-  '& .MuiInputBase-root': {
-    color: theme.palette.secondary.main,
-    border: '1.2px solid #DCDDE3',
-    overflow: 'hidden',
+  '&.MuiInputBase-root': {
     borderRadius: '12px',
-    transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow']),
+    fontSize: '14px',
 
-    '& fieldset': {
-      border: 'none',
+    '&::before': {
+      borderBottom: 'none !important',
+
+      '::hover': {
+        borderBottom: 'none',
+      },
     },
 
-    '&.Mui-focused': {
-      boxShadow: `${alpha(theme.palette.secondary.main, 0.25)} 0 0 0 2px`,
-      borderColor: theme.palette.secondary.main,
+    '&::after': {
+      borderBottom: 'none',
+    },
+
+    '& .MuiSvgIcon-root': {
+      display: 'none',
     },
   },
 
-  '& .MuiInputBase-input': {
-    '::placeholder': {
-      color: theme.palette.secondary.main,
-      fontWeight: 400,
-      fontSize: '14px',
-    },
-  },
+  '& .MuiSelect-select': {
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    borderRadius: '12px',
+    // color: theme.palette.common.white,
+    padding: theme.spacing(1, 2),
+    transition: theme.transitions.create(['background-color', 'box-shadow', 'border-color']),
 
-  '& .MuiInputAdornment-root': {
-    color: theme.palette.secondary.main,
-
-    '& .MuiIconButton-root': {
-      color: '#B1B2B3',
+    '&:focus': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
   },
 }));
 
-export { MenuItem, Select };
+export { MenuItem, Select, NativeSelect };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { VisibilityOffOutlined, VisibilityOutlined } from '@mui/icons-material';
@@ -12,36 +12,92 @@ import {
   FormLabel,
   IconButton,
   InputAdornment,
-  MenuItem,
   Typography,
 } from '@mui/material';
 
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+
+import lightDarkModeAnimation from '@/assets/animations/light-dark-mode.json';
 import Checkbox from '@/components/Checkbox';
 import LanguageSelector from '@/components/LanguageSelector';
 import Meta from '@/components/Meta';
 import TextField from '@/components/TextField';
-import useOrientation from '@/hooks/useOrientation';
-import { supportedLanguages } from '@/locales/i18n';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { changeTheme } from '@/store/theme/theme.slice';
+import { Themes } from '@/theme/types';
 
 function SignIn() {
-  const { t, i18n } = useTranslation(['common', 'glossary', 'validation']);
+  const { t } = useTranslation(['common', 'glossary', 'validation']);
 
-  const isPortrait = useOrientation();
+  const lightDarkModeAnimationRef = useRef<LottieRefCurrentProps>(null);
+
+  const dispatch = useAppDispatch();
+  const themeMode = useAppSelector((state) => state.theme.themeMode);
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const currentLanguage = supportedLanguages.find((lang) => lang.code === i18n.language);
+  const switchToDarkTheme = () => {
+    lightDarkModeAnimationRef.current?.playSegments([30, 100], true);
+    dispatch(changeTheme(Themes.DARK));
+  };
+
+  const switchToLightTheme = () => {
+    lightDarkModeAnimationRef.current?.playSegments([60, 30], true);
+    dispatch(changeTheme(Themes.LIGHT));
+  };
+
+  const toggleTheme = () => {
+    if (themeMode === Themes.DARK) switchToLightTheme();
+    else switchToDarkTheme();
+  };
+
+  const { values, handleChange, touched, errors, handleSubmit } = useFormik({
+    initialValues: {
+      email: 'foobar@example.com',
+      password: 'foobar',
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email('Enter a valid email').required('Email is required'),
+      password: Yup.string()
+        .min(8, 'Password should be of minimum 8 characters length')
+        .required('Password is required'),
+    }),
+    onSubmit: (form) => {
+      alert(JSON.stringify(form, null, 2));
+    },
+  });
   return (
     <Container
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        height: '100%',
+        height: '98%',
       }}
     >
       <Meta title={t('common:signIn')} />
+
+      <Box
+        display="flex"
+        alignItems="center"
+        alignSelf="flex-end"
+        style={{ cursor: 'pointer' }}
+        onClick={toggleTheme}
+      >
+        <Lottie
+          animationData={lightDarkModeAnimation}
+          loop={false}
+          autoplay={false}
+          style={{ width: '100px', height: '100px' }}
+          lottieRef={lightDarkModeAnimationRef}
+        />
+
+        <Typography variant="overline">{themeMode === Themes.DARK ? 'Dark' : 'Light'}</Typography>
+      </Box>
 
       <Box
         display="flex"
@@ -65,15 +121,26 @@ function SignIn() {
           {t('common:logIntoMyAccount')}
         </Typography>
 
-        <Box display="flex" flexDirection="column" marginTop="20px">
+        <Box
+          display="flex"
+          flexDirection="column"
+          marginTop="20px"
+          component="form"
+          onSubmit={handleSubmit}
+        >
           <FormControl variant="outlined">
             <FormLabel htmlFor="email">{t('glossary:email')}</FormLabel>
 
             <TextField
               id="email"
+              name="email"
               color="secondary"
               placeholder={t('validation:enterYourEmail')}
               variant="outlined"
+              defaultValue={values.email}
+              onChange={handleChange}
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
             />
           </FormControl>
 
@@ -82,10 +149,15 @@ function SignIn() {
 
             <TextField
               id="password"
+              name="password"
               color="secondary"
               placeholder={t('validation:enterYourPassword')}
               variant="outlined"
               type={showPassword ? 'text' : 'password'}
+              value={values.password}
+              onChange={handleChange}
+              error={touched.password && Boolean(errors.password)}
+              helperText={touched.password && errors.password}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -135,7 +207,7 @@ function SignIn() {
             </Button>
           </Box>
 
-          <Button variant="contained" style={{ padding: '20px 0' }}>
+          <Button variant="contained" style={{ padding: '20px 0' }} type="submit">
             <Typography
               variant="button"
               component="span"
