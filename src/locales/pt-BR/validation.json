@@ -1,3 +1,6 @@
 {
-  "invalidEmail": "Endereço de e-mail inválido"
+  "invalidEmail": "Endereço de e-mail inválido",
+  "enterYourEmail": "Digite seu e-mail",
+  "enterYourPassword": "Digite a sua senha",
+  "rememberMe": "Lembrar de mim"
 }

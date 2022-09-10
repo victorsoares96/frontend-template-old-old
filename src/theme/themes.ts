@@ -4,16 +4,71 @@ import { deepmerge } from '@mui/utils';
 import { Themes } from './types';
 
 const sharedTheme: ThemeOptions = {
+  typography: {
+    fontFamily: 'Poppins, sans-serif',
+  },
   palette: {
     background: {
       default: '#fafafa',
       paper: '#fff',
+    },
+    primary: {
+      main: '#585ce5',
+      light: '#777af3',
+      dark: '#3d40a0',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      main: '#19634d',
+      light: '#5be4a8',
+      dark: '#1c312b',
+      contrastText: '#ffffff',
+    },
+    error: {
+      main: '#f44336',
+      light: '#f6685e',
+      dark: '#aa2e25',
+      contrastText: '#ffffff',
+    },
+    warning: {
+      main: '#ff9800',
+      light: '#ffac33',
+      dark: '#b26a00',
+      contrastText: 'rgba(0,0,0,0.87)',
+    },
+    info: {
+      main: '#2196f3',
+      light: '#4dabf5',
+      dark: '#1769aa',
+      contrastText: '#ffffff',
+    },
+    success: {
+      main: '#4caf50',
+      light: '#6fbf73',
+      dark: '#357a38',
+      contrastText: 'rgba(0,0,0,0.87)',
     },
   },
   components: {
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,
+      },
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          fontWeight: 500,
+          fontSize: '14px',
+          padding: '6px 0',
+        },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          borderRadius: '50px',
+        },
       },
     },
     MuiDivider: {
@@ -40,14 +95,18 @@ const themes: Record<Themes, ThemeOptions> = {
     palette: {
       mode: 'light',
       background: {
-        default: '#e5e5e5',
-        paper: '#fff',
+        default: '#fafafa',
+        paper: '#ffffff',
       },
-      primary: {
-        main: '#585CE5',
+      text: {
+        primary: 'rgba(0,0,0,0.87)',
+        secondary: 'rgba(0,0,0,0.54)',
+        disabled: 'rgba(0,0,0,0.38)',
+        hint: 'rgba(0,0,0,0.38)',
       },
+      divider: 'rgba(0,0,0,0.12)',
     },
-  }),
+  } as ThemeOptions),
 
   dark: deepmerge(sharedTheme, {
     palette: {
@@ -59,8 +118,15 @@ const themes: Record<Themes, ThemeOptions> = {
       primary: {
         main: '#333',
       },
+      text: {
+        primary: '#fff',
+        secondary: 'rgba(255,255,255,0.7)',
+        disabled: 'rgba(255,255,255,0.5)',
+        hint: 'rgba(255,255,255,0.5)',
+      },
+      divider: 'rgba(255,255,255,0.12)',
     },
-  }),
+  } as ThemeOptions),
 };
 
 export default themes;

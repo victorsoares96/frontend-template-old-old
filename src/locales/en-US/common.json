@@ -5,5 +5,7 @@
   "edit": "Edit",
   "save": "Save",
   "add": "Add",
-  "close": "Close"
+  "close": "Close",
+  "welcome": "Welcome to the customer portal",
+  "logIntoMyAccount": "Log into my account"
 }

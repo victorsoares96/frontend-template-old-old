@@ -1,20 +1,16 @@
-import { Fragment } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-
+import { Container } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import { withErrorHandler } from '@/error-handling';
 import AppErrorBoundaryFallback from '@/error-handling/fallbacks/App';
 import Routes from '@/routes';
-import Header from '@/sections/Header';
 import HotKeys from '@/sections/HotKeys';
 import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
-import Sidebar from '@/sections/Sidebar';
 
 function App() {
   return (
-    <Fragment>
+    <Container sx={{ height: '100vh' }}>
       <CssBaseline />
 
       <Notifications />
@@ -23,14 +19,8 @@ function App() {
 
       <SW />
 
-      <BrowserRouter>
-        <Header />
-
-        <Sidebar />
-
-        <Routes />
-      </BrowserRouter>
-    </Fragment>
+      <Routes />
+    </Container>
   );
 }
 

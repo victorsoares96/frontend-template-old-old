@@ -1,3 +1,6 @@
 {
-  "invalidEmail": "Invalid email address"
+  "invalidEmail": "Invalid email address",
+  "enterYourEmail": "Enter your email address",
+  "enterYourPassword": "Enter your password",
+  "rememberMe": "Remember me"
 }

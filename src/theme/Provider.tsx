@@ -1,6 +1,8 @@
+/* eslint-disable prettier/prettier */
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { useAppSelector } from '@/hooks/useAppSelector';
+import '@/theme/fonts';
 
 import themes from './themes';
 import type { CustomThemeProviderProps } from './types';
