@@ -10,7 +10,7 @@ export const mainApi = createApi({
   tagTypes: [],
   endpoints: (builder) => ({
     signIn: builder.mutation<SignInRequestResponse, SignInRequestParams>({
-      query: (params) => ({
+      query: ({ email, password }) => ({
         url: '/sessions',
         method: 'POST',
         headers: {
@@ -19,8 +19,8 @@ export const mainApi = createApi({
           'Content-Type': 'application/json',
         },
         data: {
-          username: params.username,
-          password: params.password,
+          email,
+          password,
         },
       }),
     }),

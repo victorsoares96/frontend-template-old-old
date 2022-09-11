@@ -34,6 +34,7 @@ const axiosBaseQuery =
           Authorization: `Bearer ${token}`,
         };
       }
+
       const result = await axios({
         url: baseUrl + url,
         method,

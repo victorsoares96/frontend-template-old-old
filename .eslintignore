@@ -1,3 +1,4 @@
 !.*.js
 **/dist/**
 lint-staged.config.js
+mockServiceWorker.js

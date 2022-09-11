@@ -1,3 +1,4 @@
+import { BiHomeAlt } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -91,58 +92,30 @@ function Sidebar() {
       <Divider />
 
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
+        <ListItem disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: isSidebarOpen ? 'initial' : 'center',
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
               sx={{
-                minHeight: 48,
-                justifyContent: isSidebarOpen ? 'initial' : 'center',
-                px: 2.5,
+                minWidth: 0,
+                mr: isSidebarOpen ? 3 : 'auto',
+                justifyContent: 'center',
               }}
             >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: isSidebarOpen ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
+              <BiHomeAlt size={24} />
+            </ListItemIcon>
 
-              <ListItemText primary={text} sx={{ opacity: isSidebarOpen ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+            <ListItemText primary="Item Text" sx={{ opacity: isSidebarOpen ? 1 : 0 }} />
+          </ListItemButton>
+        </ListItem>
       </List>
 
       <Divider />
-
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: isSidebarOpen ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: isSidebarOpen ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-
-              <ListItemText primary={text} sx={{ opacity: isSidebarOpen ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
     </Drawer>
   );
   /* return (

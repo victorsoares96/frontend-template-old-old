@@ -6,6 +6,6 @@ export type SignInRequestResponse = {
 };
 
 export type SignInRequestParams = {
-  username: string;
+  email: string;
   password: string;
 };

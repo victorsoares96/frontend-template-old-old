@@ -19,6 +19,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
+import { useSignInMutation } from '@/api/main/main.api';
 import lightDarkModeAnimation from '@/assets/animations/light-dark-mode.json';
 import Checkbox from '@/components/Checkbox';
 import LanguageSelector from '@/components/LanguageSelector';
@@ -31,6 +32,8 @@ import { Themes } from '@/theme/types';
 
 function SignIn() {
   const { t } = useTranslation(['common', 'glossary', 'validation']);
+
+  const [signIn] = useSignInMutation();
 
   const lightDarkModeAnimationRef = useRef<LottieRefCurrentProps>(null);
 
@@ -54,19 +57,24 @@ function SignIn() {
     else switchToDarkTheme();
   };
 
-  const { values, handleChange, touched, errors, handleSubmit } = useFormik({
+  const { values, handleChange, touched, errors, handleSubmit, setSubmitting } = useFormik({
     initialValues: {
-      email: 'foobar@example.com',
-      password: 'foobar',
+      email: '',
+      password: '',
     },
+    enableReinitialize: true,
     validationSchema: Yup.object({
       email: Yup.string().email('Enter a valid email').required('Email is required'),
       password: Yup.string()
         .min(8, 'Password should be of minimum 8 characters length')
         .required('Password is required'),
     }),
-    onSubmit: (form) => {
-      alert(JSON.stringify(form, null, 2));
+    validateOnChange: false,
+    validateOnBlur: false,
+    onSubmit: ({ email, password }) => {
+      signIn({ email, password })
+        .unwrap()
+        .finally(() => setSubmitting(false));
     },
   });
   return (

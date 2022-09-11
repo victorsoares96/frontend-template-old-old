@@ -36,6 +36,10 @@
     "react-hooks/exhaustive-deps": "warn",
     "import/no-cycle": "warn",
     "import/prefer-default-export": "off",
-    "react/jsx-fragments": ["error", "element"]
+    "react/jsx-fragments": ["error", "element"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["src/mocks/*.ts", "**/*.spec.tsx"] }
+    ]
   }
 }
