@@ -74,7 +74,7 @@ function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar elevation={1} position="fixed" open={isSidebarOpen}>
+      <AppBar elevation={0} position="fixed" open={isSidebarOpen} color="default">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <FlexBox sx={{ alignItems: 'center' }}>
             <IconButton

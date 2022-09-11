@@ -1,4 +1,7 @@
+import { useRef } from 'react';
 import { BiHomeAlt } from 'react-icons/bi';
+import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
+import { IoIosLogOut } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -6,14 +9,13 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DefaultIcon from '@mui/icons-material/Deblur';
 import MailIcon from '@mui/icons-material/Mail';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { Divider, IconButton } from '@mui/material';
+import { Button, Divider, IconButton, Typography } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { CSSObject, Theme, styled, useTheme } from '@mui/material/styles';
 
 import { useAppDispatch } from '@/hooks/useAppDispatch';
@@ -21,7 +23,9 @@ import { useAppSelector } from '@/hooks/useAppSelector';
 import {
   close as closeSidebarAction,
   open as openSidebarAction,
+  toggle as toggleSidebarAction,
 } from '@/store/sidebar/sidebar.slice';
+import isMobile from '@/utils/is-mobile';
 
 const drawerWidth = 240;
 
@@ -80,16 +84,15 @@ function Sidebar() {
 
   const openSidebar = () => dispatch(openSidebarAction());
   const closeSidebar = () => dispatch(closeSidebarAction());
+  const toggleSidebar = () => dispatch(toggleSidebarAction());
 
   return (
-    <Drawer variant="permanent" open={isSidebarOpen}>
+    <Drawer variant="permanent" open={isSidebarOpen} sx={{ position: 'relative' }}>
       <DrawerHeader>
         <IconButton onClick={closeSidebar}>
           {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
       </DrawerHeader>
-
-      <Divider />
 
       <List>
         <ListItem disablePadding sx={{ display: 'block' }}>
@@ -110,36 +113,62 @@ function Sidebar() {
               <BiHomeAlt size={24} />
             </ListItemIcon>
 
-            <ListItemText primary="Item Text" sx={{ opacity: isSidebarOpen ? 1 : 0 }} />
+            <ListItemText primary="Home" sx={{ opacity: isSidebarOpen ? 1 : 0 }} />
           </ListItemButton>
         </ListItem>
       </List>
 
-      <Divider />
-    </Drawer>
-  );
-  /* return (
-    <SwipeableDrawer
-      anchor="left"
-      open={isSidebarOpen}
-      onClose={() => dispatch(closeSidebar())}
-      onOpen={() => dispatch(openSidebar())}
-      disableBackdropTransition={false}
-      swipeAreaWidth={30}
-    >
-      <List sx={{ width: 250, pt: (theme) => `${theme.mixins.toolbar.minHeight}px` }}>
-        <ListItem sx={{ p: 0 }}>
-          <ListItemButton onClick={() => dispatch(closeSidebar())} component={Link} to="/not-found">
-            <ListItemIcon>
-              <DefaultIcon />
+      <Divider sx={{ margin: isMobile ? '0 12px' : '0 32px' }} />
+
+      <Button
+        variant="outlined"
+        sx={{ border: '1.2px solid #E1E0E7', padding: '12px 0', margin: '40px 34px' }}
+      >
+        <IoIosLogOut size={24} color="#677E77" />
+
+        <Typography letterSpacing="0.02em" marginLeft="8px" fontSize="14px" color="#677E77">
+          Sair
+        </Typography>
+      </Button>
+
+      <List style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+        <ListItem disablePadding sx={{ display: 'block' }} onClick={toggleSidebar}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '100%',
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                justifyContent: 'center',
+              }}
+            >
+              {!isSidebarOpen && (
+                <BsArrowRightCircle size={24} color={theme.palette.secondary.main} />
+              )}
+              {isSidebarOpen && (
+                <BsArrowLeftCircle size={24} color={theme.palette.secondary.main} />
+              )}
             </ListItemIcon>
 
-            <ListItemText>NotFound Route</ListItemText>
+            <ListItemText
+              primary="Recolher menu"
+              primaryTypographyProps={{ variant: 'caption', fontSize: '14px' }}
+              sx={{
+                opacity: isSidebarOpen ? 1 : 0,
+                color: theme.palette.secondary.main,
+              }}
+            />
           </ListItemButton>
         </ListItem>
       </List>
-    </SwipeableDrawer>
-  ); */
+    </Drawer>
+  );
 }
 
 export default Sidebar;

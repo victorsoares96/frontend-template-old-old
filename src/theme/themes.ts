@@ -13,15 +13,15 @@ const sharedTheme: ThemeOptions = {
       paper: '#fff',
     },
     primary: {
-      main: '#585ce5',
-      light: '#777af3',
-      dark: '#3d40a0',
-      contrastText: '#ffffff',
-    },
-    secondary: {
       main: '#19634d',
       light: '#5be4a8',
       dark: '#1c312b',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      main: '#585ce5',
+      light: '#777af3',
+      dark: '#3d40a0',
       contrastText: '#ffffff',
     },
     error: {

@@ -29,6 +29,7 @@ import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { changeTheme } from '@/store/theme/theme.slice';
 import { Themes } from '@/theme/types';
+import isMobile from '@/utils/is-mobile';
 
 function SignIn() {
   const { t } = useTranslation(['common', 'glossary', 'validation']);
@@ -104,7 +105,9 @@ function SignIn() {
           lottieRef={lightDarkModeAnimationRef}
         />
 
-        <Typography variant="overline">{themeMode === Themes.DARK ? 'Dark' : 'Light'}</Typography>
+        {!isMobile && (
+          <Typography variant="overline">{themeMode === Themes.DARK ? 'Dark' : 'Light'}</Typography>
+        )}
       </Box>
 
       <Box
