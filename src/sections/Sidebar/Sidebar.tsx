@@ -9,7 +9,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DefaultIcon from '@mui/icons-material/Deblur';
 import MailIcon from '@mui/icons-material/Mail';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { Button, Divider, IconButton, Typography } from '@mui/material';
+import { Box, Button, Divider, IconButton, Typography } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -44,9 +44,9 @@ const closedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `calc(${theme.spacing(10)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(11)} + 1px)`,
   },
 });
 
@@ -98,37 +98,102 @@ function Sidebar() {
         <ListItem disablePadding sx={{ display: 'block' }}>
           <ListItemButton
             sx={{
+              display: 'flex',
               minHeight: 48,
-              justifyContent: isSidebarOpen ? 'initial' : 'center',
-              px: 2.5,
+              justifyContent: isSidebarOpen ? 'space-between' : 'unset',
+              alignItems: 'center',
+              padding: isSidebarOpen ? '0 32px' : '0 12px',
+            }}
+          >
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              marginLeft={isSidebarOpen ? 'unset' : 'auto'}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: isSidebarOpen ? '8px' : 'auto',
+                }}
+              >
+                <BiHomeAlt size={24} color={theme.palette.text.secondary} />
+              </ListItemIcon>
+
+              {isSidebarOpen && (
+                <ListItemText
+                  primary="Home"
+                  primaryTypographyProps={{
+                    fontWeight: 400,
+                    fontSize: '14px',
+                    color: theme.palette.text.secondary,
+                  }}
+                />
+              )}
+            </Box>
+
+            <Box
+              display="flex"
+              alignSelf="center"
+              width="4px"
+              height="38px"
+              borderRadius="2px"
+              bgcolor="primary.light"
+              marginLeft="auto"
+            />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: 'flex-start',
+              padding: '0 32px',
             }}
           >
             <ListItemIcon
               sx={{
                 minWidth: 0,
-                mr: isSidebarOpen ? 3 : 'auto',
-                justifyContent: 'center',
+                mr: isSidebarOpen ? '8px' : 'auto',
               }}
             >
-              <BiHomeAlt size={24} />
+              <BiHomeAlt size={24} color={theme.palette.text.secondary} />
             </ListItemIcon>
 
-            <ListItemText primary="Home" sx={{ opacity: isSidebarOpen ? 1 : 0 }} />
+            <ListItemText
+              primary="Home"
+              primaryTypographyProps={{
+                fontWeight: 400,
+                fontSize: '14px',
+                color: theme.palette.text.secondary,
+              }}
+              sx={{ opacity: isSidebarOpen ? 1 : 0 }}
+            />
           </ListItemButton>
         </ListItem>
       </List>
 
-      <Divider sx={{ margin: isMobile ? '0 12px' : '0 32px' }} />
+      <Divider sx={{ margin: isSidebarOpen ? '0 32px' : '0 12px' }} />
 
       <Button
         variant="outlined"
-        sx={{ border: '1.2px solid #E1E0E7', padding: '12px 0', margin: '40px 34px' }}
+        sx={{
+          display: 'flex',
+          border: '1.2px solid #E1E0E7',
+          height: '48px',
+          margin: isSidebarOpen ? '40px 32px' : '40px 12px',
+          // padding: isSidebarOpen ? '12px 0' : '5px 5px',
+          // margin: isSidebarOpen ? '40px 34px' : '40px 5px',
+        }}
       >
         <IoIosLogOut size={24} color="#677E77" />
 
-        <Typography letterSpacing="0.02em" marginLeft="8px" fontSize="14px" color="#677E77">
-          Sair
-        </Typography>
+        {isSidebarOpen && (
+          <Typography letterSpacing="0.02em" marginLeft="8px" fontSize="14px" color="#677E77">
+            Sair
+          </Typography>
+        )}
       </Button>
 
       <List style={{ position: 'absolute', bottom: 0, width: '100%' }}>
