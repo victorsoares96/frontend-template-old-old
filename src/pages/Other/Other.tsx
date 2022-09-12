@@ -1,17 +1,19 @@
+import { Fragment } from 'react';
+
 import Typography from '@mui/material/Typography';
 
 import Meta from '@/components/Meta';
 import { FullSizeCenteredFlexBox } from '@/components/styled';
 
-function Page3() {
+function Other() {
   return (
-    <>
-      <Meta title="page 3" />
+    <Fragment>
+      <Meta title="Other" />
       <FullSizeCenteredFlexBox>
-        <Typography variant="h3">Page 3</Typography>
+        <Typography variant="h3">Other</Typography>
       </FullSizeCenteredFlexBox>
-    </>
+    </Fragment>
   );
 }
 
-export default Page3;
+export default Other;

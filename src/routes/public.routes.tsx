@@ -1,15 +1,17 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import asyncComponentLoader from '@/utils/loader';
+import { RoutePaths } from '@/utils/enums/routes';
 
-const SignIn = asyncComponentLoader(() => import('@/pages/SignIn'));
+import type { Route as RouteProp } from './routes';
 
-export function PublicRoutes() {
+export function PublicRoutes({ routes }: { routes: Array<RouteProp> }) {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/sign-in" replace />} />
-      <Route path="sign-in" element={<SignIn />} />
-      <Route path="*" element={<Navigate to="/sign-in" replace />} />
+      <Route path="/" element={<Navigate to={RoutePaths.SignIn} replace />} />
+      <Route path="*" element={<Navigate to={RoutePaths.SignIn} replace />} />
+      {routes.map((route) => (
+        <Route key={route.path} path={route.path} element={<route.element />} />
+      ))}
     </Routes>
   );
 }

@@ -125,7 +125,7 @@ function SignIn() {
         <Typography
           variant="h6"
           component="h6"
-          color="secondary.dark"
+          color="primary.dark"
           fontWeight={700}
           fontSize="24px"
         >
@@ -145,7 +145,7 @@ function SignIn() {
             <TextField
               id="email"
               name="email"
-              color="secondary"
+              color="primary"
               placeholder={t('validation:enterYourEmail')}
               variant="outlined"
               defaultValue={values.email}
@@ -161,7 +161,7 @@ function SignIn() {
             <TextField
               id="password"
               name="password"
-              color="secondary"
+              color="primary"
               placeholder={t('validation:enterYourPassword')}
               variant="outlined"
               type={showPassword ? 'text' : 'password'}
@@ -209,16 +209,17 @@ function SignIn() {
               href="/forgot-password"
               target="_blank"
               rel="noopener noreferrer"
+              color="secondary"
               sx={{
                 textDecorationLine: 'underline',
-                textDecorationColor: (theme) => theme.palette.primary.main,
+                textDecorationColor: (theme) => theme.palette.secondary.main,
               }}
             >
               {t('common:forgotPassword')}
             </Button>
           </Box>
 
-          <Button variant="contained" style={{ padding: '20px 0' }} type="submit">
+          <Button variant="contained" color="secondary" style={{ padding: '20px 0' }} type="submit">
             <Typography
               variant="button"
               component="span"

@@ -9,5 +9,6 @@
   "welcome": "Bem vindo ao portal do cliente",
   "logIntoMyAccount": "Entrar na minha conta",
   "forgotPassword": "Esqueceu a senha?",
-  "signIn": "Entrar"
+  "signIn": "Entrar",
+  "notFound": "Não encontrado"
 }
