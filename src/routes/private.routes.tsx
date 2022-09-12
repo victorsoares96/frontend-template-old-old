@@ -4,25 +4,29 @@ import { Box } from '@mui/material';
 
 import Header from '@/sections/Header';
 import Sidebar from '@/sections/Sidebar';
+import { DrawerHeader } from '@/sections/Sidebar/Sidebar';
 import { RoutePaths } from '@/utils/enums/routes';
-import { getPageHeight } from '@/utils/get-page-height.util';
 
 import type { Route as RouteProp } from './routes';
 
 export function PrivateRoutes({ routes }: { routes: Array<RouteProp> }) {
   return (
-    <Box component="main" sx={{ backgroundColor: 'red', flexGrow: 1, p: 3 }}>
+    <Box sx={{ display: 'flex' }}>
       <Header />
 
       <Sidebar />
 
-      <Routes>
-        <Route path="/" element={<Navigate to={RoutePaths.Home} replace />} />
-        <Route path="*" element={<Navigate to={RoutePaths.Home} replace />} />
-        {routes.map((route) => (
-          <Route key={route.path} path={route.path} element={<route.element />} />
-        ))}
-      </Routes>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+
+        <Routes>
+          <Route path="/" element={<Navigate to={RoutePaths.Home} replace />} />
+          <Route path="*" element={<Navigate to={RoutePaths.Home} replace />} />
+          {routes.map((route) => (
+            <Route key={route.path} path={route.path} element={<route.element />} />
+          ))}
+        </Routes>
+      </Box>
     </Box>
   );
 }

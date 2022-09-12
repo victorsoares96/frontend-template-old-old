@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ThemeIcon from '@mui/icons-material/InvertColors';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Typography } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
@@ -35,16 +36,14 @@ interface AppBarProps extends MuiAppBarProps {
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
-  // zIndex: theme.zIndex.drawer + 1,
-  // marginLeft: drawerWidth,
-  // width: `calc(100% - ${theme.spacing(10)})`,
+  width: `calc(100% - ${theme.spacing(8)} - 1px)`,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
-    // marginLeft: drawerWidth,
-    // width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -75,64 +74,13 @@ function Header() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar elevation={0} position="fixed" open={isSidebarOpen} color="default">
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <FlexBox sx={{ alignItems: 'center' }}>
-            <IconButton
-              onClick={() => dispatch(toggleSidebar())}
-              size="large"
-              edge="start"
-              color="info"
-              aria-label="menu"
-              sx={{ mr: 1 }}
-            >
-              <MenuIcon />
-            </IconButton>
-
-            <Button onClick={showNotification} color="info">
-              {t('confirm')}
-            </Button>
-          </FlexBox>
-
-          <FlexBox>
-            <FlexBox>
-              <Tooltip title="Hot keys" arrow>
-                <HotKeysButton
-                  size="small"
-                  variant="outlined"
-                  aria-label="open hotkeys dialog"
-                  onClick={() => dispatch(openHotkeysDialog())}
-                >
-                  alt + /
-                </HotKeysButton>
-              </Tooltip>
-            </FlexBox>
-
-            <Divider orientation="vertical" flexItem />
-
-            <Tooltip title="It's open source" arrow>
-              <IconButton color="info" size="large" component="a" href={repository} target="_blank">
-                <GitHubIcon />
-              </IconButton>
-            </Tooltip>
-
-            <Divider orientation="vertical" flexItem />
-
-            <Tooltip title="Switch theme" arrow>
-              <IconButton
-                color="info"
-                edge="end"
-                size="large"
-                onClick={() => dispatch(toggleTheme())}
-              >
-                <ThemeIcon />
-              </IconButton>
-            </Tooltip>
-          </FlexBox>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <AppBar elevation={0} position="fixed" open={isSidebarOpen} color="default">
+      <Toolbar>
+        <Typography variant="h6" noWrap component="div">
+          Mini variant drawer
+        </Typography>
+      </Toolbar>
+    </AppBar>
   );
 }
 

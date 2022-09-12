@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 
+import { Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 import Meta from '@/components/Meta';
@@ -8,12 +9,21 @@ import { DrawerHeader } from '@/sections/Sidebar/Sidebar';
 
 function Home() {
   return (
-    <Fragment>
+    <Container
+      sx={{
+        backgroundColor: 'red',
+        display: 'flex',
+        flexDirection: 'column',
+        justifySelf: 'flex-start',
+        alignSelf: 'flex-start',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        width: '100%',
+      }}
+    >
       <Meta title="Home" />
 
-      <DrawerHeader />
-
-      <Typography paragraph>
+      <Typography paragraph textAlign="left">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo
         vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque
@@ -36,7 +46,7 @@ function Home() {
         Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas accumsan lacus
         vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
       </Typography>
-    </Fragment>
+    </Container>
   );
 }
 
