@@ -85,7 +85,7 @@ function SignIn() {
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: '98%',
+        height: '98vh',
       }}
     >
       <Meta title={t('common:signIn')} />

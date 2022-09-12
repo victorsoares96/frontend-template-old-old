@@ -14,7 +14,7 @@ import { PublicRoutes } from './public.routes';
 
 export type Route = {
   name: string;
-  icon: IconType;
+  Icon: IconType;
   path: RoutePaths;
   element: (props: AnyProps) => JSX.Element;
   private: boolean;
@@ -28,28 +28,28 @@ const SignIn = asyncComponentLoader(() => import('@/pages/SignIn'));
 const routes: Array<Route> = [
   {
     name: i18n.t('glossary:home'),
-    icon: BiHomeAlt,
+    Icon: BiHomeAlt,
     path: RoutePaths.Home,
     element: Home,
     private: true,
   },
   {
     name: i18n.t('glossary:other'),
-    icon: AiFillBug,
+    Icon: AiFillBug,
     path: RoutePaths.Other,
     element: Other,
     private: true,
   },
   {
     name: i18n.t('common:signIn'),
-    icon: AiOutlineFileUnknown,
+    Icon: AiOutlineFileUnknown,
     path: RoutePaths.SignIn,
     element: SignIn,
     private: false,
   },
   {
     name: i18n.t('common:notFound'),
-    icon: AiOutlineFileUnknown,
+    Icon: AiOutlineFileUnknown,
     path: RoutePaths.NotFound,
     element: NotFound,
     private: false,

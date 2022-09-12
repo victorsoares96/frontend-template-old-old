@@ -16,7 +16,10 @@ export function PrivateRoutes({ routes }: { routes: Array<RouteProp> }) {
 
       <Sidebar />
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 3, backgroundColor: (theme) => theme.palette.background.default }}
+      >
         <DrawerHeader />
 
         <Routes>

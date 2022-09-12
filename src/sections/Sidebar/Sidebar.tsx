@@ -2,11 +2,7 @@ import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
 import { IoIosLogOut } from 'react-icons/io';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import MailIcon from '@mui/icons-material/Mail';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { Box, Button, Divider, IconButton, Typography } from '@mui/material';
+import { Box, Button, Divider, Typography } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -42,9 +38,9 @@ const closedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `calc(${theme.spacing(10)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(11)} + 1px)`,
   },
 });
 
@@ -89,61 +85,135 @@ function Sidebar() {
   return (
     <Drawer variant="permanent" open={isSidebarOpen}>
       <DrawerHeader>
-        <IconButton onClick={toggleSidebar}>
-          {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-        </IconButton>
+        <Box display="flex" justifyContent="center" width="100%" margin="44px 0">
+          <Image src="https://github.com/victorsoares96.png" height="70px" />
+        </Box>
       </DrawerHeader>
 
-      <Divider />
-
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+        {privateRoutes.map(({ path, Icon, name }) => (
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate(path)}>
             <ListItemButton
               sx={{
-                minHeight: 48,
-                justifyContent: isSidebarOpen ? 'initial' : 'center',
-                px: 2.5,
+                display: 'flex',
+                minHeight: 58,
+                alignItems: 'center',
+                paddingLeft: '32px',
+                backgroundColor:
+                  // eslint-disable-next-line no-nested-ternary
+                  location.pathname === path
+                    ? theme.palette.mode === 'dark'
+                      ? 'rgba(251, 250, 246, 0.08)'
+                      : '#FBFAF6'
+                    : 'transparent',
               }}
             >
-              <ListItemIcon
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: isSidebarOpen ? '8px' : 'auto',
+                  }}
+                >
+                  <Icon
+                    size={24}
+                    color={
+                      location.pathname === path
+                        ? theme.palette.secondary.light
+                        : theme.palette.text.secondary
+                    }
+                  />
+                </ListItemIcon>
+
+                {isSidebarOpen && (
+                  <ListItemText
+                    primary={name}
+                    primaryTypographyProps={{
+                      fontWeight: location.pathname === path ? 700 : 400,
+                      fontSize: '14px',
+                      color:
+                        location.pathname === path
+                          ? theme.palette.secondary.light
+                          : theme.palette.text.secondary,
+                    }}
+                  />
+                )}
+              </Box>
+
+              <Box
+                display="flex"
+                alignSelf="center"
+                width="4px"
                 sx={{
-                  minWidth: 0,
-                  mr: isSidebarOpen ? 3 : 'auto',
-                  justifyContent: 'center',
+                  transition: 'height 0.15s ease-in-out',
                 }}
-              >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: isSidebarOpen ? 1 : 0 }} />
+                height={location.pathname === path ? '38px' : '0px'}
+                borderRadius="2px"
+                bgcolor="primary.light"
+                marginLeft="auto"
+              />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
+
+      <Divider sx={{ margin: isSidebarOpen ? '0 32px' : '0 12px' }} />
+
+      <Button
+        variant="outlined"
+        color="primary"
+        sx={{
+          display: 'flex',
+          border: '1.2px solid #E1E0E7',
+          height: '48px',
+          margin: isSidebarOpen ? '40px 32px' : '40px 12px',
+        }}
+        onClick={() => dispatch(logout())}
+      >
+        <IoIosLogOut size={24} color={theme.palette.primary.main} />
+
+        {isSidebarOpen && (
+          <Typography letterSpacing="0.02em" marginLeft="8px" fontSize="14px" color="primary.main">
+            Sair
+          </Typography>
+        )}
+      </Button>
+
+      <List style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+        <ListItem disablePadding sx={{ display: 'block' }} onClick={toggleSidebar}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '100%',
+            }}
+          >
+            <ListItemIcon
               sx={{
-                minHeight: 48,
-                justifyContent: isSidebarOpen ? 'initial' : 'center',
-                px: 2.5,
+                minWidth: 0,
+                justifyContent: 'center',
               }}
             >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: isSidebarOpen ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: isSidebarOpen ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+              {!isSidebarOpen && (
+                <BsArrowRightCircle size={24} color={theme.palette.secondary.main} />
+              )}
+              {isSidebarOpen && (
+                <BsArrowLeftCircle size={24} color={theme.palette.secondary.main} />
+              )}
+            </ListItemIcon>
+
+            <ListItemText
+              primary="Recolher menu"
+              primaryTypographyProps={{ variant: 'caption', fontSize: '14px' }}
+              sx={{
+                opacity: isSidebarOpen ? 1 : 0,
+                color: theme.palette.secondary.main,
+              }}
+            />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Drawer>
   );
