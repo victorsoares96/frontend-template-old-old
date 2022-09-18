@@ -30,6 +30,7 @@ function Items() {
     <List>
       {privateRoutes.map(({ path, Icon, name }) => (
         <ListItem
+          key={path}
           disablePadding
           sx={{ display: 'block' }}
           onClick={() => {

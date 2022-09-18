@@ -50,11 +50,6 @@ const sharedTheme: ThemeOptions = {
     },
   },
   components: {
-    MuiButtonBase: {
-      defaultProps: {
-        disableElevation: true,
-      },
-    },
     MuiButton: {
       defaultProps: {
         disableElevation: true,

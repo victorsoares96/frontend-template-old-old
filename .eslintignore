@@ -2,3 +2,4 @@
 **/dist/**
 lint-staged.config.js
 mockServiceWorker.js
+vite.config.ts

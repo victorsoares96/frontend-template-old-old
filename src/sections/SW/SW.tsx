@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { Fragment, useCallback, useEffect, useRef } from 'react';
 
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
@@ -41,13 +41,19 @@ function SW() {
           variant: 'warning',
           persist: true,
           action: (
-            <>
-              <Button onClick={() => updateServiceWorker(true)}>Reload</Button>
-              <Button onClick={close}>Close</Button>
-            </>
+            <Fragment>
+              <Button color="inherit" onClick={() => updateServiceWorker(true)}>
+                Reload
+              </Button>
+              <Button color="inherit" onClick={close}>
+                Close
+              </Button>
+            </Fragment>
           ),
         },
       });
+
+      console.log(notificationKey.current);
     }
   }, [close, enqueueSnackbar, needRefresh, offlineReady, updateServiceWorker]);
 

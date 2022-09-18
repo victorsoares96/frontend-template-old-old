@@ -57,7 +57,7 @@ export const closeSnackbar =
         : { ...notification },
     );
 
-    dispatch(setNotification(newNotifications));
+    dispatch(setNotifications(newNotifications));
   };
 
 export const removeSnackbar =
