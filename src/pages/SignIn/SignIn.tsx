@@ -84,7 +84,7 @@ function SignIn() {
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: '100%',
+        height: '100vh',
         width: '100%',
         position: 'relative',
       }}
@@ -93,8 +93,10 @@ function SignIn() {
 
       <Box
         sx={{
-          background:
-            'linear-gradient(190deg, rgba(129,118,255,0.85) 0%, rgba(17,0,29,1) 35%, rgba(21,21,24,1) 95%)',
+          background: (theme) =>
+            theme.palette.mode === 'dark'
+              ? 'linear-gradient(190deg, rgba(129,118,255,0.85) 0%, rgba(17,0,29,1) 35%, rgba(21,21,24,1) 95%)'
+              : 'linear-gradient(190deg, rgba(197,197,197,1) 5%, rgba(250,250,250,1) 50%, rgba(255,255,255,1) 100%)',
           width: '100%',
           height: '100%',
           position: 'absolute',
@@ -114,10 +116,11 @@ function SignIn() {
         padding="40px 80px"
       >
         <Box
-          display="flex"
-          alignItems="center"
-          alignSelf="flex-end"
-          style={{ cursor: 'pointer' }}
+          style={{
+            cursor: 'pointer',
+            display: 'flex',
+            alignSelf: 'flex-end',
+          }}
           onClick={toggleTheme}
         >
           <Lottie
@@ -128,11 +131,11 @@ function SignIn() {
             lottieRef={lightDarkModeAnimationRef}
           />
 
-          {!isMobile && (
+          {/*! isMobile && (
             <Typography variant="overline">
               {themeMode === Themes.DARK ? 'Dark' : 'Light'}
             </Typography>
-          )}
+          ) */}
         </Box>
 
         <Box
@@ -248,8 +251,6 @@ function SignIn() {
               variant="contained"
               sx={{
                 padding: '20px 0',
-                background: (theme) =>
-                  `linear-gradient(60deg, #6B5EFF 0%, ${theme.palette.primary.main} 82%)`,
               }}
               type="submit"
             >

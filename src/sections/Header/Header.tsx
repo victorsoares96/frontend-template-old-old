@@ -77,7 +77,6 @@ function Header() {
       open={isSidebarOpen}
       sx={{
         backgroundColor: theme.palette.background.paper,
-        boxShadow: '0px 14px 24px rgba(150, 135, 135, 0.08)',
       }}
     >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
@@ -101,14 +100,18 @@ function Header() {
           <Avatar
             alt="Remy Sharp"
             src="https://github.com/victorsoares96.png"
-            sx={{ width: 32, height: 32, border: '1.2px solid #00A94F' }}
+            sx={{
+              width: 32,
+              height: 32,
+              border: `1.2px solid ${theme.palette.secondary.dark}`,
+            }}
           />
 
-          <Typography variant="caption" color="#00A94F" marginLeft="12px" marginRight="6px">
+          <Typography variant="caption" color="secondary.main" marginLeft="12px" marginRight="6px">
             {user?.name}
           </Typography>
 
-          <FiChevronDown size={16} color="#00A94F" />
+          <FiChevronDown size={16} color={theme.palette.secondary.main} />
         </Button>
       </Toolbar>
     </AppBar>

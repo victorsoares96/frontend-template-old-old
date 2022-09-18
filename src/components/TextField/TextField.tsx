@@ -12,8 +12,12 @@ const TextField = styled((props: MuiTextFieldProps) => (
     color: theme.palette.secondary.main,
     border: '1.2px solid #DCDDE3',
     overflow: 'hidden',
-    borderRadius: '12px',
+    borderRadius: '50px',
     transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow']),
+
+    '& .MuiInputAdornment-root': {
+      paddingRight: '10px',
+    },
 
     '& fieldset': {
       border: 'none',

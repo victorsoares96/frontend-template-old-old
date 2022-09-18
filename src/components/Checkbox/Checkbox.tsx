@@ -40,7 +40,7 @@ function Checkbox(props: CheckboxProps) {
         >
           <CheckIcon
             fontSize="small"
-            sx={{ color: (theme) => theme.palette.primary.dark, opacity: 0.8 }}
+            sx={{ color: (theme) => theme.palette.secondary.main, opacity: 0.8 }}
           />
         </Box>
       }

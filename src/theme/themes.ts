@@ -5,7 +5,7 @@ import { Themes } from './types';
 
 const sharedTheme: ThemeOptions = {
   typography: {
-    fontFamily: 'Poppins, sans-serif',
+    fontFamily: 'Montserrat, Work Sans, sans-serif',
   },
   palette: {
     background: {
@@ -39,7 +39,7 @@ const sharedTheme: ThemeOptions = {
     info: {
       main: '#585ce5',
       light: '#777af3',
-      dark: '#3d40a0',
+      dark: '#6B5EFF',
       contrastText: '#ffffff',
     },
     success: {
@@ -62,7 +62,22 @@ const sharedTheme: ThemeOptions = {
       styleOverrides: {
         root: {
           textTransform: 'none',
-          borderRadius: '12px',
+          borderRadius: '50px',
+        },
+        contained: {
+          background: 'linear-gradient(60deg, #6B5EFF 0%, #7109B4 82%)',
+          transition: 'background 1s ease-out',
+          backgroundSize: '1px 200px',
+          ':hover': {
+            backgroundPosition: '100px',
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          borderRadius: '50px',
         },
       },
     },
@@ -102,6 +117,12 @@ const themes: Record<Themes, ThemeOptions> = {
         default: '#fafafa',
         paper: '#ffffff',
       },
+      secondary: {
+        main: '#aacc00',
+        light: '#dcf5a2',
+        dark: '#658025',
+        contrastText: 'rgba(0,0,0,0.87)',
+      },
       text: {
         primary: 'rgba(0,0,0,0.87)',
         secondary: 'rgba(0,0,0,0.54)',
@@ -116,8 +137,8 @@ const themes: Record<Themes, ThemeOptions> = {
     palette: {
       mode: 'dark',
       background: {
-        default: '#131720',
-        paper: '#171717',
+        default: '#151518',
+        paper: '#1C1B1B',
       },
       text: {
         primary: '#fff',

@@ -83,10 +83,23 @@ function Sidebar() {
   const toggleSidebar = () => dispatch(toggleSidebarAction());
 
   return (
-    <Drawer variant="permanent" open={isSidebarOpen}>
+    <Drawer
+      variant="permanent"
+      open={isSidebarOpen}
+      PaperProps={{
+        sx: {
+          border: 'none',
+        },
+      }}
+    >
       <DrawerHeader>
         <Box display="flex" justifyContent="center" width="100%" margin="44px 0">
-          <Image src="https://github.com/victorsoares96.png" height="70px" />
+          <Typography variant="h4" color="primary.main" fontWeight={600}>
+            {isSidebarOpen ? 'be' : 'b'}
+          </Typography>
+          <Typography variant="h4" color="secondary.main" marginTop="5px" fontWeight={600}>
+            {isSidebarOpen ? 'he' : 'h'}
+          </Typography>
         </Box>
       </DrawerHeader>
 
@@ -115,14 +128,7 @@ function Sidebar() {
                     mr: isSidebarOpen ? '8px' : 'auto',
                   }}
                 >
-                  <Icon
-                    size={24}
-                    color={
-                      location.pathname === path
-                        ? theme.palette.secondary.light
-                        : theme.palette.text.secondary
-                    }
-                  />
+                  <Icon size={24} color={theme.palette.text.secondary} />
                 </ListItemIcon>
 
                 {isSidebarOpen && (
@@ -131,10 +137,7 @@ function Sidebar() {
                     primaryTypographyProps={{
                       fontWeight: location.pathname === path ? 700 : 400,
                       fontSize: '14px',
-                      color:
-                        location.pathname === path
-                          ? theme.palette.secondary.light
-                          : theme.palette.text.secondary,
+                      color: theme.palette.text.secondary,
                     }}
                   />
                 )}
@@ -149,7 +152,7 @@ function Sidebar() {
                 }}
                 height={location.pathname === path ? '38px' : '0px'}
                 borderRadius="2px"
-                bgcolor="primary.light"
+                bgcolor="secondary.light"
                 marginLeft="auto"
               />
             </ListItemButton>
@@ -160,20 +163,19 @@ function Sidebar() {
       <Divider sx={{ margin: isSidebarOpen ? '0 32px' : '0 12px' }} />
 
       <Button
-        variant="outlined"
-        color="primary"
+        variant="text"
+        color="inherit"
         sx={{
           display: 'flex',
-          border: '1.2px solid #E1E0E7',
           height: '48px',
           margin: isSidebarOpen ? '40px 32px' : '40px 12px',
         }}
         onClick={() => dispatch(logout())}
       >
-        <IoIosLogOut size={24} color={theme.palette.primary.main} />
+        <IoIosLogOut size={24} color="inherit" />
 
         {isSidebarOpen && (
-          <Typography letterSpacing="0.02em" marginLeft="8px" fontSize="14px" color="primary.main">
+          <Typography letterSpacing="0.02em" marginLeft="8px" fontSize="14px" color="inherit">
             Sair
           </Typography>
         )}
@@ -197,10 +199,10 @@ function Sidebar() {
               }}
             >
               {!isSidebarOpen && (
-                <BsArrowRightCircle size={24} color={theme.palette.secondary.main} />
+                <BsArrowRightCircle size={24} color={theme.palette.text.secondary} />
               )}
               {isSidebarOpen && (
-                <BsArrowLeftCircle size={24} color={theme.palette.secondary.main} />
+                <BsArrowLeftCircle size={24} color={theme.palette.text.secondary} />
               )}
             </ListItemIcon>
 
@@ -209,7 +211,7 @@ function Sidebar() {
               primaryTypographyProps={{ variant: 'caption', fontSize: '14px' }}
               sx={{
                 opacity: isSidebarOpen ? 1 : 0,
-                color: theme.palette.secondary.main,
+                color: theme.palette.text.secondary,
               }}
             />
           </ListItemButton>
