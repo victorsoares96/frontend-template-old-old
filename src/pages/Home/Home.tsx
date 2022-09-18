@@ -1,17 +1,12 @@
-import { Fragment } from 'react';
-
 import { Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 import Meta from '@/components/Meta';
-import { FullSizeCenteredFlexBox } from '@/components/styled';
-import { DrawerHeader } from '@/sections/Sidebar/Sidebar';
 
 function Home() {
   return (
     <Container
       sx={{
-        backgroundColor: 'red',
         display: 'flex',
         flexDirection: 'column',
         justifySelf: 'flex-start',

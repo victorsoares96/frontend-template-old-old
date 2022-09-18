@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 
 import Header from '@/sections/Header';
 import Sidebar from '@/sections/Sidebar';
-import { DrawerHeader } from '@/sections/Sidebar/Sidebar';
+import { DrawerHeader } from '@/sections/Sidebar/styled';
 import { RoutePaths } from '@/utils/enums/routes';
 
 import type { Route as RouteProp } from './routes';
@@ -24,7 +24,7 @@ export function PrivateRoutes({ routes }: { routes: Array<RouteProp> }) {
           background: (theme) =>
             theme.palette.mode === 'dark'
               ? `radial-gradient(circle, rgba(21,21,24,1) 0%, rgba(21,21,24,1) 82%, rgba(28,27,27,1) 100%)`
-              : '#fafafa',
+              : theme.palette.background.default,
         }}
       >
         <DrawerHeader />

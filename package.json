@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc --skipLibCheck && vite build --debug",
     "preview": "vite preview",
     "https-preview": "serve dist --ssl --cors --port 3002",

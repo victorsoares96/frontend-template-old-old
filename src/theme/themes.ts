@@ -114,8 +114,8 @@ const themes: Record<Themes, ThemeOptions> = {
     palette: {
       mode: 'light',
       background: {
-        default: '#fafafa',
-        paper: '#ffffff',
+        default: '#efefef',
+        paper: '#fafafa',
       },
       secondary: {
         main: '#aacc00',
