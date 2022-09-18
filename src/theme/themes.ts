@@ -13,16 +13,16 @@ const sharedTheme: ThemeOptions = {
       paper: '#fff',
     },
     primary: {
-      main: '#19634d',
-      light: '#5be4a8',
-      dark: '#1c312b',
+      main: '#7109B4',
+      light: '#7B2CBF',
+      dark: '#560BAD',
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#585ce5',
-      light: '#777af3',
-      dark: '#3d40a0',
-      contrastText: '#ffffff',
+      main: '#D2F77A',
+      light: '#dcf5a2',
+      dark: '#658025',
+      contrastText: 'rgba(0,0,0,0.87)',
     },
     error: {
       main: '#f44336',
@@ -37,9 +37,9 @@ const sharedTheme: ThemeOptions = {
       contrastText: 'rgba(0,0,0,0.87)',
     },
     info: {
-      main: '#2196f3',
-      light: '#4dabf5',
-      dark: '#1769aa',
+      main: '#585ce5',
+      light: '#777af3',
+      dark: '#3d40a0',
       contrastText: '#ffffff',
     },
     success: {
@@ -116,11 +116,8 @@ const themes: Record<Themes, ThemeOptions> = {
     palette: {
       mode: 'dark',
       background: {
-        default: '#111',
+        default: '#131720',
         paper: '#171717',
-      },
-      primary: {
-        main: '#333',
       },
       text: {
         primary: '#fff',

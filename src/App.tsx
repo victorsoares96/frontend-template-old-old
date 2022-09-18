@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import { withErrorHandler } from '@/error-handling';
@@ -10,7 +10,7 @@ import SW from '@/sections/SW';
 
 function App() {
   return (
-    <Container sx={{ height: '100vh' }}>
+    <Box sx={{ height: '100vh' }}>
       <CssBaseline />
 
       <Notifications />
@@ -20,7 +20,7 @@ function App() {
       <SW />
 
       <Routes />
-    </Container>
+    </Box>
   );
 }
 
