@@ -22,10 +22,10 @@ function Logout() {
       }}
       onClick={() => dispatch(logout())}
     >
-      <IoIosLogOut size={24} color={theme.palette.primary.dark} />
+      <IoIosLogOut size={24} color={theme.palette.secondary.main} />
 
       {isSidebarOpen && (
-        <Typography letterSpacing="0.02em" marginLeft="8px" fontSize="14px" color="primary.dark">
+        <Typography letterSpacing="0.02em" marginLeft="8px" fontSize="14px" color="secondary.main">
           Sair
         </Typography>
       )}

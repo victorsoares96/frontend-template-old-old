@@ -27,6 +27,7 @@ function Sidebar() {
         PaperProps={{
           sx: {
             width: 'calc(100% - 64px)',
+            backgroundImage: 'none',
           },
         }}
         variant="temporary"

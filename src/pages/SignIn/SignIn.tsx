@@ -113,7 +113,7 @@ function SignIn() {
         justifyContent="space-between"
         alignItems="center"
         width="100%"
-        padding="40px 80px"
+        padding={isMobile ? '0 20px 20px 20px' : '40px 80px'}
       >
         <Box
           style={{
