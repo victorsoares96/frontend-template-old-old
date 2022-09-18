@@ -6,6 +6,7 @@ import {
   close as closeSidebarAction,
   open as openSidebarAction,
 } from '@/store/sidebar/sidebar.slice';
+import { isIOS } from '@/utils/is-iOS.util';
 import isMobile from '@/utils/is-mobile';
 
 import Footer from './Footer';
@@ -32,6 +33,8 @@ function Sidebar() {
         }}
         variant="temporary"
         anchor="left"
+        disableBackdropTransition={!isIOS}
+        disableDiscovery={isIOS}
         open={isSidebarOpen}
         onClose={closeSidebar}
         onOpen={openSidebar}
