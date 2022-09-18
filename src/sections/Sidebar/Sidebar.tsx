@@ -1,15 +1,8 @@
-import { useRef } from 'react';
-import { BiHomeAlt } from 'react-icons/bi';
 import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
 import { IoIosLogOut } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import DefaultIcon from '@mui/icons-material/Deblur';
-import MailIcon from '@mui/icons-material/Mail';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { Button, Divider, IconButton, Typography } from '@mui/material';
+import { Box, Button, Divider, Typography } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -18,14 +11,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { CSSObject, Theme, styled, useTheme } from '@mui/material/styles';
 
+import Image from '@/components/Image';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
+import { privateRoutes } from '@/routes/routes';
+import { logout } from '@/store/session/session.slice';
 import {
   close as closeSidebarAction,
-  open as openSidebarAction,
   toggle as toggleSidebarAction,
 } from '@/store/sidebar/sidebar.slice';
-import isMobile from '@/utils/is-mobile';
 
 const drawerWidth = 240;
 
@@ -44,9 +38,9 @@ const closedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `calc(${theme.spacing(10)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(11)} + 1px)`,
   },
 });
 
@@ -79,56 +73,110 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 function Sidebar() {
   const theme = useTheme();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
   const isSidebarOpen = useAppSelector((state) => state.sidebar.open);
 
-  const openSidebar = () => dispatch(openSidebarAction());
   const closeSidebar = () => dispatch(closeSidebarAction());
   const toggleSidebar = () => dispatch(toggleSidebarAction());
 
   return (
-    <Drawer variant="permanent" open={isSidebarOpen} sx={{ position: 'relative' }}>
+    <Drawer variant="permanent" open={isSidebarOpen}>
       <DrawerHeader>
-        <IconButton onClick={closeSidebar}>
-          {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-        </IconButton>
+        <Box display="flex" justifyContent="center" width="100%" margin="44px 0">
+          <Image src="https://github.com/victorsoares96.png" height="70px" />
+        </Box>
       </DrawerHeader>
 
       <List>
-        <ListItem disablePadding sx={{ display: 'block' }}>
-          <ListItemButton
-            sx={{
-              minHeight: 48,
-              justifyContent: isSidebarOpen ? 'initial' : 'center',
-              px: 2.5,
-            }}
-          >
-            <ListItemIcon
+        {privateRoutes.map(({ path, Icon, name }) => (
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate(path)}>
+            <ListItemButton
               sx={{
-                minWidth: 0,
-                mr: isSidebarOpen ? 3 : 'auto',
-                justifyContent: 'center',
+                display: 'flex',
+                minHeight: 58,
+                alignItems: 'center',
+                paddingLeft: '32px',
+                backgroundColor:
+                  // eslint-disable-next-line no-nested-ternary
+                  location.pathname === path
+                    ? theme.palette.mode === 'dark'
+                      ? 'rgba(251, 250, 246, 0.08)'
+                      : '#FBFAF6'
+                    : 'transparent',
               }}
             >
-              <BiHomeAlt size={24} />
-            </ListItemIcon>
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: isSidebarOpen ? '8px' : 'auto',
+                  }}
+                >
+                  <Icon
+                    size={24}
+                    color={
+                      location.pathname === path
+                        ? theme.palette.secondary.light
+                        : theme.palette.text.secondary
+                    }
+                  />
+                </ListItemIcon>
 
-            <ListItemText primary="Home" sx={{ opacity: isSidebarOpen ? 1 : 0 }} />
-          </ListItemButton>
-        </ListItem>
+                {isSidebarOpen && (
+                  <ListItemText
+                    primary={name}
+                    primaryTypographyProps={{
+                      fontWeight: location.pathname === path ? 700 : 400,
+                      fontSize: '14px',
+                      color:
+                        location.pathname === path
+                          ? theme.palette.secondary.light
+                          : theme.palette.text.secondary,
+                    }}
+                  />
+                )}
+              </Box>
+
+              <Box
+                display="flex"
+                alignSelf="center"
+                width="4px"
+                sx={{
+                  transition: 'height 0.15s ease-in-out',
+                }}
+                height={location.pathname === path ? '38px' : '0px'}
+                borderRadius="2px"
+                bgcolor="primary.light"
+                marginLeft="auto"
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
       </List>
 
-      <Divider sx={{ margin: isMobile ? '0 12px' : '0 32px' }} />
+      <Divider sx={{ margin: isSidebarOpen ? '0 32px' : '0 12px' }} />
 
       <Button
         variant="outlined"
-        sx={{ border: '1.2px solid #E1E0E7', padding: '12px 0', margin: '40px 34px' }}
+        color="primary"
+        sx={{
+          display: 'flex',
+          border: '1.2px solid #E1E0E7',
+          height: '48px',
+          margin: isSidebarOpen ? '40px 32px' : '40px 12px',
+        }}
+        onClick={() => dispatch(logout())}
       >
-        <IoIosLogOut size={24} color="#677E77" />
+        <IoIosLogOut size={24} color={theme.palette.primary.main} />
 
-        <Typography letterSpacing="0.02em" marginLeft="8px" fontSize="14px" color="#677E77">
-          Sair
-        </Typography>
+        {isSidebarOpen && (
+          <Typography letterSpacing="0.02em" marginLeft="8px" fontSize="14px" color="primary.main">
+            Sair
+          </Typography>
+        )}
       </Button>
 
       <List style={{ position: 'absolute', bottom: 0, width: '100%' }}>

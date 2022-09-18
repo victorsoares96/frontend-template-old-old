@@ -1,4 +1,5 @@
-import { Box } from '@mui/material';
+import { Fragment } from 'react';
+
 import CssBaseline from '@mui/material/CssBaseline';
 
 import { withErrorHandler } from '@/error-handling';
@@ -10,7 +11,7 @@ import SW from '@/sections/SW';
 
 function App() {
   return (
-    <Box sx={{ height: '100vh' }}>
+    <Fragment>
       <CssBaseline />
 
       <Notifications />
@@ -20,7 +21,7 @@ function App() {
       <SW />
 
       <Routes />
-    </Box>
+    </Fragment>
   );
 }
 

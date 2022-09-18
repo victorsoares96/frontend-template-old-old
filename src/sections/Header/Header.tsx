@@ -1,29 +1,21 @@
 import { useTranslation } from 'react-i18next';
+import { FiChevronDown } from 'react-icons/fi';
+import { useLocation } from 'react-router-dom';
 
-import GitHubIcon from '@mui/icons-material/GitHub';
-import ThemeIcon from '@mui/icons-material/InvertColors';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Avatar, Typography } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
-import Tooltip from '@mui/material/Tooltip';
-import { CSSObject, Theme, styled, useTheme } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 
-import { FlexBox } from '@/components/styled';
-import { repository, title } from '@/config';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { useNotifications } from '@/hooks/useNotifications';
-import { open as openHotkeysDialog } from '@/store/hotkeys/hotkeys.slice';
-import { toggle as toggleSidebar } from '@/store/sidebar/sidebar.slice';
-import { toggle as toggleTheme } from '@/store/theme/theme.slice';
+import { privateRoutes } from '@/routes/routes';
 
-import { HotKeysButton } from './styled';
 import { getRandomJoke } from './utils';
 
 const drawerWidth = 240;
@@ -35,7 +27,7 @@ interface AppBarProps extends MuiAppBarProps {
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
+  width: `calc(100% - ${theme.spacing(11)} - 1px)`,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -53,9 +45,14 @@ const AppBar = styled(MuiAppBar, {
 function Header() {
   const { t } = useTranslation('common');
 
+  const location = useLocation();
+
+  const theme = useTheme();
+
   const dispatch = useAppDispatch();
 
   const isSidebarOpen = useAppSelector((state) => state.sidebar.open);
+  const user = useAppSelector((state) => state.session.user);
 
   const { enqueueSnackbar } = useNotifications();
 
@@ -72,65 +69,49 @@ function Header() {
     });
   };
 
+  const CurrentRoute = privateRoutes.find((route) => route.path === location.pathname);
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar elevation={0} position="fixed" open={isSidebarOpen} color="default">
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <FlexBox sx={{ alignItems: 'center' }}>
-            <IconButton
-              onClick={() => dispatch(toggleSidebar())}
-              size="large"
-              edge="start"
-              color="info"
-              aria-label="menu"
-              sx={{ mr: 1 }}
-            >
-              <MenuIcon />
-            </IconButton>
+    <AppBar
+      elevation={0}
+      position="fixed"
+      open={isSidebarOpen}
+      sx={{
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: '0px 14px 24px rgba(150, 135, 135, 0.08)',
+      }}
+    >
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Box display="flex" alignItems="center">
+          {CurrentRoute && <CurrentRoute.Icon size={24} color={theme.palette.secondary.main} />}
 
-            <Button onClick={showNotification} color="info">
-              {t('confirm')}
-            </Button>
-          </FlexBox>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            color="secondary.main"
+            fontWeight={700}
+            fontSize="24px"
+            marginLeft="16px"
+          >
+            {CurrentRoute?.name}
+          </Typography>
+        </Box>
 
-          <FlexBox>
-            <FlexBox>
-              <Tooltip title="Hot keys" arrow>
-                <HotKeysButton
-                  size="small"
-                  variant="outlined"
-                  aria-label="open hotkeys dialog"
-                  onClick={() => dispatch(openHotkeysDialog())}
-                >
-                  alt + /
-                </HotKeysButton>
-              </Tooltip>
-            </FlexBox>
+        <Button variant="text" style={{ display: 'flex', alignItems: 'center' }}>
+          <Avatar
+            alt="Remy Sharp"
+            src="https://github.com/victorsoares96.png"
+            sx={{ width: 32, height: 32, border: '1.2px solid #00A94F' }}
+          />
 
-            <Divider orientation="vertical" flexItem />
+          <Typography variant="caption" color="#00A94F" marginLeft="12px" marginRight="6px">
+            {user?.name}
+          </Typography>
 
-            <Tooltip title="It's open source" arrow>
-              <IconButton color="info" size="large" component="a" href={repository} target="_blank">
-                <GitHubIcon />
-              </IconButton>
-            </Tooltip>
-
-            <Divider orientation="vertical" flexItem />
-
-            <Tooltip title="Switch theme" arrow>
-              <IconButton
-                color="info"
-                edge="end"
-                size="large"
-                onClick={() => dispatch(toggleTheme())}
-              >
-                <ThemeIcon />
-              </IconButton>
-            </Tooltip>
-          </FlexBox>
-        </Toolbar>
-      </AppBar>
-    </Box>
+          <FiChevronDown size={16} color="#00A94F" />
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 }
 

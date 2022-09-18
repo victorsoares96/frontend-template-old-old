@@ -9,8 +9,8 @@ const sharedTheme: ThemeOptions = {
   },
   palette: {
     background: {
-      default: '#fafafa',
-      paper: '#fff',
+      default: '#ffffff',
+      paper: '#fafafa',
     },
     primary: {
       main: '#7109B4',

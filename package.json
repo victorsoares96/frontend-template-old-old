@@ -14,9 +14,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc --skipLibCheck && vite build --debug",
     "preview": "vite preview",
-    "https-preview": "serve dist",
+    "https-preview": "serve dist --ssl --cors --port 3002",
     "prepare": "husky install",
     "style:check": "prettier --check .",
     "style:fix": "prettier --write .",
