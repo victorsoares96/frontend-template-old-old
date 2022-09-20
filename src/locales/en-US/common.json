@@ -1,0 +1,14 @@
+{
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "edit": "Edit",
+  "save": "Save",
+  "add": "Add",
+  "close": "Close",
+  "welcome": "Welcome to the customer portal",
+  "logIntoMyAccount": "Log into my account",
+  "forgotPassword": "Forgot password?",
+  "signIn": "Sign in",
+  "notFound": "Not found"
+}
