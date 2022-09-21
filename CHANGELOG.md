@@ -1,5 +1,5 @@
-## v1.0.0
+## v0.0.1
 
-###### _September 07, 2022_
+###### _September 20, 2022_
 
 🎉 First release 🎉

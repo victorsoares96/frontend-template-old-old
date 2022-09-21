@@ -10,7 +10,7 @@ function Meta({
   title,
   image = defaultMetaTags.image,
 }: MetaProps) {
-  const pageTitle = `${appTitle}${title ? ' | ' + title : ''}`;
+  const pageTitle = `${appTitle}${title ? ` | ${title}` : ''}`;
 
   return (
     <Helmet
