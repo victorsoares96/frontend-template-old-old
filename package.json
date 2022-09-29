@@ -62,7 +62,7 @@
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "@vitejs/plugin-react": "^1.3.2",
+    "@vitejs/plugin-react": "2.1.0",
     "commitizen": "^4.2.5",
     "commitizen-emoji": "^1.0.5",
     "eslint": "8.24.0",
