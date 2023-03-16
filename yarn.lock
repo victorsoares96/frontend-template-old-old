@@ -1341,20 +1341,20 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fontsource/montserrat@4.5.12":
-  version "4.5.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-4.5.12.tgz#465c61fb508f6d0055dbcbfbc6eb7307a81fdf6f"
-  integrity sha512-UQ+4ijm1sddIBtmEZ9bKgCB1rSi4Imog0YKz7wDLtMQ3Mw2ZaBseTgoLDfbWnfdowS0PLp+Z4T2KZ/1AySTlDQ==
+"@fontsource/montserrat@4.5.14":
+  version "4.5.14"
+  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-4.5.14.tgz#5f4bfc5e7f234a986d94d9e7e7193f852e6971e3"
+  integrity sha512-fTvrteVzuFUePhr4QYBGoK8G/YHLJ3IhF1HhKg0AxcFvZajJT7rM7ULdmKLSd2PkX44R3aaFZq1zDbmjbGGI+w==
 
-"@fontsource/poppins@4.5.9":
-  version "4.5.9"
-  resolved "https://registry.yarnpkg.com/@fontsource/poppins/-/poppins-4.5.9.tgz#e5c192aef005177c87e23c1b783415d1e9b4b7a8"
-  integrity sha512-PMHOYeUpdmdN1xk13aGvhvZZrv9Zt3ubx2PmDvnROHgefm0ixpFd3ogAi0fY/aWtlkUdvgt0mSkGGbtt5i4MsQ==
+"@fontsource/poppins@4.5.10":
+  version "4.5.10"
+  resolved "https://registry.yarnpkg.com/@fontsource/poppins/-/poppins-4.5.10.tgz#44dbfeacb5d89efca5ad7ad6cc941b2ac1ee424b"
+  integrity sha512-oYZVHsnlwV3VWM1SE/m6SUxVh0QLk5+2wB+lBiXcI7N/0KVQWmV9YykaPqfJHBLvmdya+MAOnv+BQHeLU1vOOw==
 
-"@fontsource/work-sans@4.5.12":
-  version "4.5.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/work-sans/-/work-sans-4.5.12.tgz#4e68dc559b7d8e76ae2d3c1dafd081fea877e682"
-  integrity sha512-imoabud+eUL7FTHyGtpSN4KoYOmWXBWweMpVrgWhLGeSDYnH0IVWeUZT+cPtPcgrHWSvxefsl0oEdP9Ef3E2mw==
+"@fontsource/work-sans@4.5.14":
+  version "4.5.14"
+  resolved "https://registry.yarnpkg.com/@fontsource/work-sans/-/work-sans-4.5.14.tgz#965bf103baa9f812d042b5f678a34f632fa76f2e"
+  integrity sha512-AFBSDBA3hnSCXHwb52qBOMEGqF5nfdbANp+y5/hbE1PMjYfFY0lUdtUwL5J7mRAdyn1NJwobJlhduHtlAyPzmA==
 
 "@humanwhocodes/config-array@^0.10.5":
   version "0.10.5"
